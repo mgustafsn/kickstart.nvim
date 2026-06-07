@@ -1,13 +1,15 @@
--- Add indentation guides even on blank lines
-
 ---@module 'lazy'
 ---@type LazySpec
 return {
   'lukas-reineke/indent-blankline.nvim',
-  -- Enable `lukas-reineke/indent-blankline.nvim`
-  -- See `:help ibl`
   main = 'ibl',
-  ---@module 'ibl'
-  ---@type ibl.config
-  opts = {},
+  opts = function(_, opts)
+    -- Other blankline configuration here
+    return require('indent-rainbowline').make_opts(opts, {
+      color_transparency = 0.12,
+    })
+  end,
+  dependencies = {
+    'TheGLander/indent-rainbowline.nvim',
+  },
 }
